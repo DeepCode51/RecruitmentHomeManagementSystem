@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.recruit.dao.impl.InfoDao">
+
+
+
+	<select id="findMyInfoList" resultType="com.recruit.dto.InfoDto">
+		SELECT
+i.info_id AS infoId,
+i.title,
+i.content,
+i.createDate,
+i.user_id AS userId,
+u.username as username
+		FROM
+    info  i
+INNER JOIN user  u ON i.user_id = u.id
+		where  1=1 
+				<if test="userId != null and userId != 0">
+		and i.user_id=#{userId}
+		</if>
+		order by i.createDate desc
+		limit #{start},#{end}
+	</select>
+	
+	<select id="findMyInfocount" resultType="Integer">
+		SELECT
+		COUNT(i.info_id)
+		FROM
+info AS i
+INNER JOIN user AS u ON i.user_id = u.id
+		where  1=1 
+				<if test="userId != null and userId != 0">
+		and i.user_id=#{userId}
+		</if>
+	</select>
+	
+	<select id="findInfoList" resultType="com.recruit.dto.InfoDto">
+		SELECT
+i.info_id AS infoId,
+i.title,
+i.content,
+i.createDate,
+i.status,
+i.isApply,
+i.user_id AS userId,
+u.username as username
+		FROM
+    info  i
+INNER JOIN user  u ON i.user_id = u.id
+		where  1=1
+				<if test="userId != null and userId != 0">
+		and i.user_id=#{userId}
+		</if>
+			<if test="status != null and status != 0">
+		and i.status=#{status}
+		</if>
+					<if test="isApply != null and isApply != 3">
+		 and i.isApply=#{isApply}
+		</if>
+		order by i.createDate desc
+		limit #{start},#{end}
+	</select>
+	
+	<select id="findInfocount" resultType="Integer">
+		SELECT
+		COUNT(i.info_id)
+		FROM
+info AS i
+INNER JOIN user AS u ON i.user_id = u.id
+		where  1=1
+				<if test="userId != null and userId != 0">
+		and i.user_id=#{userId}
+		</if>
+			<if test="status != null and status != 0">
+		and i.status=#{status}
+		</if>
+							<if test="isApply != null and isApply != 3">
+		 and i.isApply=#{isApply}
+		</if>
+	</select>
+		<select id="findCommondList" resultType="com.recruit.dto.CommondDto">
+SELECT
+c.commond_id as commonId,
+c.content,
+c.user_id as userId,
+c.createDate,
+c.info_id as infoId,
+u.username as username
+FROM
+commond AS c
+INNER JOIN user AS u ON c.user_id = u.id
+where c.info_id=#{infoId}
+order by c.createDate desc
+		limit #{start},#{end}
+	</select>
+	
+	<select id="findCommondcount" resultType="Integer">
+		SELECT
+		COUNT(c.commond_id)
+		FROM
+commond AS c
+INNER JOIN user AS u ON c.user_id = u.id
+where c.info_id=#{infoId}
+
+	</select>
+
+</mapper>

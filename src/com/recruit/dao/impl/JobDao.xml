@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.recruit.dao.impl.JobDao">
+
+	<select id="findTopTen" resultType="com.recruit.dto.JobDto">
+		SELECT
+		t.top_id as topId,
+		t.job_id as jobId,
+		t.job_name as jobName,
+		t.count as count
+		FROM
+		top_job AS t order by count desc limit 0,10
+	</select>
+
+	<select id="findByJobId" resultType="com.recruit.dto.JobDto">
+		SELECT
+		j.job_id AS jobId,
+		j.com_id AS comId,
+		j.job_name AS jobName,
+		j.job_PersonCount AS jobPersoncount,
+		j.degree AS degree,
+		j.language AS language,
+		j.grade,
+		j.address AS address,
+		j.salary AS salary,
+		j.job_status AS jobStatus,
+		j.start_date AS startDate,
+		j.end_date AS endDate,
+		j.description AS description,
+		c.fullname AS fullname,
+		c.user_id AS userId,
+        c.comtype AS comtype,
+        c.description AS comDescription,
+        c.empcount AS empcount,
+        c.address AS comAddress,
+        c.email AS email,
+        c.tel AS tel,
+        c.manager AS manager,
+        c.m_tel AS mTel
+		FROM
+		job AS j
+		INNER JOIN company AS c ON j.com_id = c.com_id where j.job_id=#{id}
+	</select>
+
+	<select id="findComJobList" resultType="com.recruit.dto.JobDto">
+		SELECT
+		j.job_id AS jobId,
+		j.com_id AS comId,
+		j.job_name AS jobName,
+		j.job_PersonCount AS jobPersoncount,
+		j.degree AS degree,
+		j.language AS language,
+		j.grade,
+		j.address AS address,
+		j.salary AS salary,
+		j.job_status AS jobStatus,
+		j.start_date AS startDate,
+		j.end_date AS endDate,
+		j.description AS description,
+		c.fullname AS fullname
+		FROM
+		job AS j
+		INNER JOIN company AS c ON j.com_id = c.com_id 
+		where c.com_id=#{comid}
+		limit #{start},#{end}
+	</select>
+	
+	<select id="findComJobListcount" resultType="Integer">
+		SELECT
+		COUNT(j.job_id)
+		FROM
+		job AS j
+		INNER JOIN company AS c ON j.com_id = c.com_id where j.com_id=#{comid}
+	</select>
+	
+		<select id="findJobList" resultType="com.recruit.dto.JobDto">
+		SELECT
+		j.job_id AS jobId,
+		j.com_id AS comId,
+		j.job_name AS jobName,
+		j.job_PersonCount AS jobPersoncount,
+		j.degree AS degree,
+		j.language AS language,
+		j.grade,
+		j.address AS address,
+		j.salary AS salary,
+		j.job_status AS jobStatus,
+		j.start_date AS startDate,
+		j.end_date AS endDate,
+		j.description AS description,
+		c.fullname AS fullname
+		FROM
+		job AS j
+		INNER JOIN company AS c ON j.com_id = c.com_id 
+		where 1=1
+		<if test="jobName != null and jobName != ''">
+			AND ( j.job_name LIKE #{jobName}or j.address like #{jobName}  or c.fullname like #{jobName} or j.job_status LIKE #{jobName} or j.description like #{jobName}) 
+		</if>
+		limit #{start},#{end}
+	</select>
+	
+	<select id="findJobListcount" resultType="Integer">
+		SELECT
+		COUNT(j.job_id)
+		FROM
+		job AS j
+		INNER JOIN company AS c ON j.com_id = c.com_id where 1=1
+				<if test="jobName != null and jobName != ''">
+			AND ( j.job_name LIKE  #{jobName} or j.address like #{jobName}  or c.fullname like #{jobName} or j.job_status LIKE #{jobName} or j.description like #{jobName}) 
+		</if>
+	</select>
+	
+	  <update id="updateTopJob" parameterType="int" >
+   update top_job t set t.count=t.count+1 where t.job_id=#{jobId,jdbcType=INTEGER}
+  </update>
+  
+  		<select id="findHistoryJobList" resultType="com.recruit.dto.JobDto">
+		SELECT
+		j.job_id AS jobId,
+		j.com_id AS comId,
+		j.job_name AS jobName,
+		j.job_PersonCount AS jobPersoncount,
+		j.degree AS degree,
+		j.language AS language,
+		j.grade,
+		j.address AS address,
+		j.salary AS salary,
+		j.job_status AS jobStatus,
+		j.start_date AS startDate,
+		j.end_date AS endDate,
+		j.description AS description,
+		c.fullname AS fullname,
+				cr.resume_name as resumeName,
+     cr.look,
+cr.status
+		FROM
+		job AS j
+		INNER JOIN company AS c ON j.com_id = c.com_id  INNER JOIN com_resume cr on j.job_id=cr.job_id INNER JOIN emp e on cr.emp_id= e.emp_id
+		where 1=1
+		<if test="jobName != null and jobName != ''">
+			AND ( j.job_name LIKE #{jobName} or j.degree > #{jobName} or j.address like #{jobName}  or c.fullname like #{jobName} or j.job_status LIKE #{jobName} or j.description like #{jobName}) 
+		</if>
+			<if test="userId != null and userId != 0">
+		    and e.user_id=#{userId}
+				</if>
+		limit #{start},#{end}
+	</select>
+	
+	<select id="findHistoryJobListcount" resultType="Integer">
+		SELECT
+		COUNT(j.job_id)
+		FROM
+		job AS j
+		INNER JOIN company AS c ON j.com_id = c.com_id  INNER JOIN com_resume cr on j.job_id=cr.job_id INNER JOIN emp e on cr.emp_id= e.emp_id
+		where 1=1
+				<if test="jobName != null and jobName != ''">
+			AND ( j.job_name LIKE #{jobName} or j.degree > #{jobName} or j.address like #{jobName}  or c.fullname like #{jobName} or j.job_status LIKE #{jobName} or j.description like #{jobName}) 
+		</if>
+		<if test="userId != null and userId != 0">
+		    and e.user_id=#{userId}
+			</if>
+	</select>
+</mapper>

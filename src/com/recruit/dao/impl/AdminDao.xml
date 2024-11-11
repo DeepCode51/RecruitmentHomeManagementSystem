@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.recruit.dao.impl.AdminDao">
+
+
+
+	<select id="findAllCompanys" resultType="com.recruit.dto.CompanyDto">
+SELECT
+c.fullname,
+c.user_id AS userId,
+c.comtype,
+c.description,
+c.empcount,
+c.address,
+c.email,
+c.tel,
+c.manager,
+c.m_tel AS mTel,
+u.id,
+u.username,
+u.pwd,
+u.question,
+u.answer,
+c.com_id AS comId
+FROM
+company AS c
+RIGHT OUTER JOIN `user` AS u ON c.user_id = u.id
+where u.status=2
+		limit #{start},#{end}
+	</select>
+	
+	<select id="findAllCompanyscount" resultType="Integer">
+		SELECT
+		COUNT(u.id)
+FROM
+company AS c
+RIGHT OUTER JOIN `user` AS u ON c.user_id = u.id
+where u.status=2
+	</select>
+	
+		<select id="findCompanys" resultType="com.recruit.dto.CompanyDto">
+SELECT
+c.fullname,
+c.user_id AS userId,
+c.comtype,
+c.description,
+c.empcount,
+c.address,
+c.email,
+c.tel,
+c.manager,
+c.m_tel AS mTel,
+u.id,
+u.username,
+u.pwd,
+u.question,
+u.answer,
+c.com_id AS comId
+FROM
+company AS c
+RIGHT OUTER JOIN `user` AS u ON c.user_id = u.id
+where u.status=2
+				<if test="param != null and param != ''">
+		and( c.fullname like #{param} or c.username like #{param})
+		</if>
+		limit #{start},#{end}
+	</select>
+	
+	<select id="findCompanyscount" resultType="Integer">
+		SELECT
+		COUNT(u.id)
+FROM
+company AS c
+RIGHT OUTER JOIN `user` AS u ON c.user_id = u.id
+where u.status=2
+				<if test="param != null and param != ''">
+		and( c.fullname like #{param} or c.username like #{param})
+		</if>
+	</select>
+	
+		<select id="findAllEmpsList" resultType="com.recruit.dto.EmpDto">
+SELECT
+u.id,
+u.username,
+u.pwd,
+u.question,
+u.answer,
+e.emp_id as empId,
+e.realname,
+e.sex,
+e.birthday,
+e.marry,
+e.degree,
+e.tel,
+e.email,
+e.description,
+e.address,
+e.jobtype,
+e.salary,
+e.jobstatus,
+e.image,
+e.resume_name as resumeName,
+e.user_id as userId,
+e.country,
+e.qq,
+e.hj,
+e.waddress,
+e.study,
+e.`work`,
+e.family,
+e.experience,
+e.`language`
+FROM
+`user` AS u
+LEFT OUTER JOIN emp AS e ON u.id = e.user_id
+where u.status=1
+				<if test="param != null and param != ''">
+		and( e.realname like #{param} or u.username like #{param})
+		</if>
+		limit #{start},#{end}
+	</select>
+	
+	<select id="findAllEmpscount" resultType="Integer">
+		SELECT
+		COUNT(u.id)
+FROM
+`user` AS u
+LEFT OUTER JOIN emp AS e ON u.id = e.user_id
+where u.status=1
+				<if test="param != null and param != ''">
+		and( e.realname like #{param} or u.username like #{param})
+		</if>
+	</select>
+	
+	
+
+</mapper>

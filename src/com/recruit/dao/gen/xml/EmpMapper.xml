@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.recruit.dao.gen.mapper.EmpMapper" >
+  <resultMap id="BaseResultMap" type="com.recruit.dao.gen.model.Emp" >
+    <id column="emp_id" property="empId" jdbcType="INTEGER" />
+    <result column="realname" property="realname" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="VARCHAR" />
+    <result column="marry" property="marry" jdbcType="VARCHAR" />
+    <result column="degree" property="degree" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="jobtype" property="jobtype" jdbcType="VARCHAR" />
+    <result column="salary" property="salary" jdbcType="VARCHAR" />
+    <result column="jobstatus" property="jobstatus" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="resume_name" property="resumeName" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="hj" property="hj" jdbcType="VARCHAR" />
+    <result column="waddress" property="waddress" jdbcType="VARCHAR" />
+    <result column="study" property="study" jdbcType="VARCHAR" />
+    <result column="work" property="work" jdbcType="VARCHAR" />
+    <result column="family" property="family" jdbcType="VARCHAR" />
+    <result column="experience" property="experience" jdbcType="VARCHAR" />
+    <result column="language" property="language" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    emp_id, realname, sex, birthday, marry, degree, tel, email, description, address, 
+    jobtype, salary, jobstatus, image, resume_name, user_id, country, qq, hj, waddress, 
+    study, work, family, experience, language
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.recruit.dao.gen.model.EmpCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from emp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from emp
+    where emp_id = #{empId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from emp
+    where emp_id = #{empId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.recruit.dao.gen.model.EmpCriteria" >
+    delete from emp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.recruit.dao.gen.model.Emp" useGeneratedKeys="true" keyProperty="empId" >
+    insert into emp (realname, sex, birthday, 
+      marry, degree, tel, 
+      email, description, address, 
+      jobtype, salary, jobstatus, 
+      image, resume_name, user_id, 
+      country, qq, hj, waddress, 
+      study, work, family, 
+      experience, language)
+    values (#{realname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, 
+      #{marry,jdbcType=VARCHAR}, #{degree,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{jobtype,jdbcType=VARCHAR}, #{salary,jdbcType=VARCHAR}, #{jobstatus,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR}, #{resumeName,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{country,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{hj,jdbcType=VARCHAR}, #{waddress,jdbcType=VARCHAR}, 
+      #{study,jdbcType=VARCHAR}, #{work,jdbcType=VARCHAR}, #{family,jdbcType=VARCHAR}, 
+      #{experience,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.recruit.dao.gen.model.Emp" useGeneratedKeys="true" keyProperty="empId" >
+    insert into emp
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="realname != null" >
+        realname,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="marry != null" >
+        marry,
+      </if>
+      <if test="degree != null" >
+        degree,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="jobtype != null" >
+        jobtype,
+      </if>
+      <if test="salary != null" >
+        salary,
+      </if>
+      <if test="jobstatus != null" >
+        jobstatus,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="resumeName != null" >
+        resume_name,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="qq != null" >
+        qq,
+      </if>
+      <if test="hj != null" >
+        hj,
+      </if>
+      <if test="waddress != null" >
+        waddress,
+      </if>
+      <if test="study != null" >
+        study,
+      </if>
+      <if test="work != null" >
+        work,
+      </if>
+      <if test="family != null" >
+        family,
+      </if>
+      <if test="experience != null" >
+        experience,
+      </if>
+      <if test="language != null" >
+        language,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="marry != null" >
+        #{marry,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null" >
+        #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="jobtype != null" >
+        #{jobtype,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null" >
+        #{salary,jdbcType=VARCHAR},
+      </if>
+      <if test="jobstatus != null" >
+        #{jobstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="resumeName != null" >
+        #{resumeName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="hj != null" >
+        #{hj,jdbcType=VARCHAR},
+      </if>
+      <if test="waddress != null" >
+        #{waddress,jdbcType=VARCHAR},
+      </if>
+      <if test="study != null" >
+        #{study,jdbcType=VARCHAR},
+      </if>
+      <if test="work != null" >
+        #{work,jdbcType=VARCHAR},
+      </if>
+      <if test="family != null" >
+        #{family,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null" >
+        #{experience,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null" >
+        #{language,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.recruit.dao.gen.model.EmpCriteria" resultType="java.lang.Integer" >
+    select count(*) from emp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update emp
+    <set >
+      <if test="record.empId != null" >
+        emp_id = #{record.empId,jdbcType=INTEGER},
+      </if>
+      <if test="record.realname != null" >
+        realname = #{record.realname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null" >
+        birthday = #{record.birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marry != null" >
+        marry = #{record.marry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.degree != null" >
+        degree = #{record.degree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null" >
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobtype != null" >
+        jobtype = #{record.jobtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salary != null" >
+        salary = #{record.salary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobstatus != null" >
+        jobstatus = #{record.jobstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null" >
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resumeName != null" >
+        resume_name = #{record.resumeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.country != null" >
+        country = #{record.country,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qq != null" >
+        qq = #{record.qq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hj != null" >
+        hj = #{record.hj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.waddress != null" >
+        waddress = #{record.waddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.study != null" >
+        study = #{record.study,jdbcType=VARCHAR},
+      </if>
+      <if test="record.work != null" >
+        work = #{record.work,jdbcType=VARCHAR},
+      </if>
+      <if test="record.family != null" >
+        family = #{record.family,jdbcType=VARCHAR},
+      </if>
+      <if test="record.experience != null" >
+        experience = #{record.experience,jdbcType=VARCHAR},
+      </if>
+      <if test="record.language != null" >
+        language = #{record.language,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update emp
+    set emp_id = #{record.empId,jdbcType=INTEGER},
+      realname = #{record.realname,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=VARCHAR},
+      marry = #{record.marry,jdbcType=VARCHAR},
+      degree = #{record.degree,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      jobtype = #{record.jobtype,jdbcType=VARCHAR},
+      salary = #{record.salary,jdbcType=VARCHAR},
+      jobstatus = #{record.jobstatus,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      resume_name = #{record.resumeName,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      country = #{record.country,jdbcType=VARCHAR},
+      qq = #{record.qq,jdbcType=VARCHAR},
+      hj = #{record.hj,jdbcType=VARCHAR},
+      waddress = #{record.waddress,jdbcType=VARCHAR},
+      study = #{record.study,jdbcType=VARCHAR},
+      work = #{record.work,jdbcType=VARCHAR},
+      family = #{record.family,jdbcType=VARCHAR},
+      experience = #{record.experience,jdbcType=VARCHAR},
+      language = #{record.language,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.recruit.dao.gen.model.Emp" >
+    update emp
+    <set >
+      <if test="realname != null" >
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="marry != null" >
+        marry = #{marry,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null" >
+        degree = #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="jobtype != null" >
+        jobtype = #{jobtype,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null" >
+        salary = #{salary,jdbcType=VARCHAR},
+      </if>
+      <if test="jobstatus != null" >
+        jobstatus = #{jobstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="resumeName != null" >
+        resume_name = #{resumeName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="hj != null" >
+        hj = #{hj,jdbcType=VARCHAR},
+      </if>
+      <if test="waddress != null" >
+        waddress = #{waddress,jdbcType=VARCHAR},
+      </if>
+      <if test="study != null" >
+        study = #{study,jdbcType=VARCHAR},
+      </if>
+      <if test="work != null" >
+        work = #{work,jdbcType=VARCHAR},
+      </if>
+      <if test="family != null" >
+        family = #{family,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null" >
+        experience = #{experience,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null" >
+        language = #{language,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where emp_id = #{empId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.recruit.dao.gen.model.Emp" >
+    update emp
+    set realname = #{realname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      marry = #{marry,jdbcType=VARCHAR},
+      degree = #{degree,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      jobtype = #{jobtype,jdbcType=VARCHAR},
+      salary = #{salary,jdbcType=VARCHAR},
+      jobstatus = #{jobstatus,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      resume_name = #{resumeName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      country = #{country,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      hj = #{hj,jdbcType=VARCHAR},
+      waddress = #{waddress,jdbcType=VARCHAR},
+      study = #{study,jdbcType=VARCHAR},
+      work = #{work,jdbcType=VARCHAR},
+      family = #{family,jdbcType=VARCHAR},
+      experience = #{experience,jdbcType=VARCHAR},
+      language = #{language,jdbcType=VARCHAR}
+    where emp_id = #{empId,jdbcType=INTEGER}
+  </update>
+</mapper>

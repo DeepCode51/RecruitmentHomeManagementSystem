@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+	PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+	"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+		
+<classPathEntry location="F:/yk_workspace/recruit/WebRoot/WEB-INF/lib/mysql-connector-java-5.1.8-bin.jar"/>
+	<context id="recruit" targetRuntime="MyBatis3" defaultModelType="conditional">
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+		<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+			<property name="searchString" value="Example$" />
+			<property name="replaceString" value="Criteria" />
+		</plugin>
+        <commentGenerator>
+            <!-- <property name="suppressDate" value="false"/> -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+ 
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://127.0.0.1:3306/graduation_job"
+			userId="root" password="123456">
+		</jdbcConnection>
+		
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<javaModelGenerator targetPackage="com.recruit.dao.gen.model" targetProject="recruit">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+			<property name="immutable" value="false" />
+		</javaModelGenerator>
+		<sqlMapGenerator targetPackage="com.recruit.dao.gen.xml" targetProject="recruit">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<!-- or ANNOTATEDMAPPER -->
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.recruit.dao.gen.mapper" targetProject="recruit">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<!-- TABLES -->
+				<!-- 用户表 -->
+<!--        <table tableName="user" schema="" domainObjectName="User"> -->
+<!-- 		<generatedKey column="id" sqlStatement="JDBC" identity="true" />  -->
+<!-- 	</table>   -->
+				<!-- 企业表 -->
+<!-- 		       <table tableName="company" schema="" domainObjectName="Company"> -->
+<!-- 			<generatedKey column="com_id" sqlStatement="JDBC" identity="true" />  -->
+<!-- 		</table>  -->
+				<!-- 用户信息表 -->
+<!-- 		   <table tableName="emp" schema="" domainObjectName="Emp"> -->
+<!--  			<generatedKey column="emp_id" sqlStatement="JDBC" identity="true" /> -->
+<!--  		</table>  -->
+				<!-- 职位表 -->
+<!-- 		       <table tableName="job" schema="" domainObjectName="Job"> -->
+<!-- 			<generatedKey column="job_id" sqlStatement="JDBC" identity="true" />  -->
+<!-- 		</table>  -->
+				<!-- 职位浏览表 -->
+<!-- 		 <table tableName="emp_look" schema="" domainObjectName="EmpLook"> -->
+<!-- 			<generatedKey column="look_id" sqlStatement="JDBC" identity="true" />  -->
+<!-- 		</table>  -->
+				<!-- 公司职位简历表 -->
+<!-- 				 <table tableName="com_resume" schema="" domainObjectName="ComResume"> -->
+<!-- 			<generatedKey column="resume_id" sqlStatement="JDBC" identity="true" />  -->
+<!-- 		</table>  -->
+						<!-- 职位top -->
+<!-- 		 <table tableName="top_job" schema="" domainObjectName="TopJob"> -->
+<!-- 			<generatedKey column="top_id" sqlStatement="JDBC" identity="true" />  -->
+<!-- 		</table>  -->
+
+						<!-- 信息表 -->
+	 <table tableName="info" schema="" domainObjectName="Info"> 
+		<generatedKey column="info_id" sqlStatement="JDBC" identity="true" />
+	</table>
+							<!-- 信息表 -->
+<!-- 	 <table tableName="commond" schema="" domainObjectName="Commond">  -->
+<!-- 		<generatedKey column="commond_id" sqlStatement="JDBC" identity="true" /> -->
+<!-- 	</table> -->
+	
+
+		
+	</context>
+</generatorConfiguration>

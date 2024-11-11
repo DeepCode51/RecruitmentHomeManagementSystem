@@ -1,0 +1,15 @@
+/*famouse start*/
+#famous{width:964px; margin:0 auto; margin-top:0px;}
+#famous .list_left, .list_center, .list_right{float:left; width:310px;color:#666666; margin:10px 0 10px 10px; _margin:10px 0 10px 5px;}
+#famous ul li{height:24px; line-height:24px;}
+#famous .list_left, .list_center{border-right:1px dotted #bababa;}
+#famous table {margin-top:10px; margin-bottom:10px;}
+.famousinnerstyle{border-right:1px  dotted #bababa; padding-right:10px;}
+#famous table tr td{ color:#666666;  }
+#famous  a{color:#666666;  font-size:12px;}
+#famous  a:hover{color:#ea5d01;}
+#famous a.blues{color:#ea5d01;}
+#famous  a.blues:hover{text-decoration:underline;}
+#famous ul li a.position {color: #EA5D01;}
+#famous ul li a.position:hover{text-decoration:underline;}
+/*famouse end*/
